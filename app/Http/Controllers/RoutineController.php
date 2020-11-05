@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Allocation;
@@ -43,11 +44,23 @@ class RoutineController extends Controller
         $day_room_slot = DayRoomSlot::all();
         $cells = $this->make3DArray($day_room_slot);
         $courses = $this->makeCourseArray(Allocation::all());
-        $courses = array_merge($courses, $courses);
+        $courses = $this->mergeCourses($courses); // changed
         $datas = $this->makeCells($cells, $courses);
         foreach ($datas as $index => $data) {
             Routine::updateOrCreate(['day' => $index], ['data' => $data]);
         }
+    }
+
+    public function mergeCourses($courses)
+    {
+        $newCourses = [];
+        foreach ($courses as $course) {
+            if ($course["credit"] == 1) {
+                continue;
+            }
+            $newCourses[] = $course;
+        }
+        return array_merge($courses, $newCourses);
     }
 
     public function makeCells($cells, $courses)
@@ -100,24 +113,24 @@ class RoutineController extends Controller
         // dd(count($cells[$index_day]));
         $c = 0;
         $t = 0;
-        foreach($cells[$index_day] as $class){
-            if($class[$index_room]["semester"] == $course["semester"] && $class[$index_room]["section"] == $course["section"]){
-                if($c>4){
+        foreach ($cells[$index_day] as $class) {
+            if ($class[$index_room]["semester"] == $course["semester"] && $class[$index_room]["section"] == $course["section"]) {
+                if ($c > 4) {
                     return false;
                 }
                 $c++;
             }
-            if($class[$index_room]["teacher"] == $course["teacher"]){
-                if($t>4){
+            if ($class[$index_room]["teacher"] == $course["teacher"]) {
+                if ($t > 4) {
                     return false;
                 }
                 $t++;
             }
         }
-        if($index_room != "304AB" &&$cells[$index_day][$index_slot][$index_room]["course_code"] == "SE 233"){
+        if ($index_room != "304AB" && $cells[$index_day][$index_slot][$index_room]["course_code"] == "SE 233") {
             return false;
         }
-        if($index_room != "405AB" &&$cells[$index_day][$index_slot][$index_room]["course_code"] == "SWE313"){
+        if ($index_room != "405AB" && $cells[$index_day][$index_slot][$index_room]["course_code"] == "SWE313") {
             return false;
         }
         return true;

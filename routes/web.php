@@ -23,6 +23,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/routine/export', [ExcelExportController::class, 'exportRoutineExcel'])->name('routine-export');
     Route::get('/routine/excel', [RoutineController::class, 'generateExcel']);
     Route::post('/allocation', [ImportExcelController::class, 'store'])->name('store');
+    // Route::post('/allocation', [ImportExcelController::class, 'test'])->name('store');
     Route::get('/day', [DayController::class, 'index']);
     Route::post('/day', [DayController::class, 'store'])->name('dayStore');
     Route::get('/room', [RoomController::class, 'index']);
