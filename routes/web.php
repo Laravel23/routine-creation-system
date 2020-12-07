@@ -9,6 +9,7 @@ use App\Http\Controllers\RoutineController;
 use App\Http\Controllers\SlotController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\ExcelExportController;
+use App\Http\Controllers\SeniorTeacherController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -33,4 +34,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/slot', [SlotController::class, 'store'])->name('slotStore');
     Route::get('/teacher', [TeacherController::class, 'index']);
     Route::post('/teacher', [TeacherController::class, 'store'])->name('teacherStore');
+    Route::get('/seniorTeacher', [SeniorTeacherController::class, 'index']);
+    Route::post('/seniorTeacher', [SeniorTeacherController::class, 'store'])->name('teacherStore');
 });

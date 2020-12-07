@@ -1,18 +1,22 @@
 @extends('layouts.app')
 @section('content')
-<div class="my-12 ">
-    <form method="POST" action="{{route('routine-store')}}">
-        @csrf
-        <button type="submit" class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500">
-            Generate Routine
-        </button>
-    </form>
-    <form method="get" action="{{route('routine-export')}}">
-        @csrf
-        <button type="submit" class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500">
-            Export Routine
-        </button>
-    </form>
+<div class="my-10 flex">
+  <div class="flex-1">
+        <form method="POST" action="{{route('routine-store')}}">
+            @csrf
+            <button type="submit" class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500">
+                Generate Routine
+            </button>
+        </form>
+    </div>
+    <div class="flex-1">
+        <form method="get" action="{{route('routine-export')}}">
+            @csrf
+            <button type="submit" class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500">
+                Export Routine
+            </button>
+        </form>
+    </div>
 </div>
 <table class="table-auto border border-gray-400 bg-white">
     <thead>

@@ -45,6 +45,12 @@
                     <span class="circle"></span>
                     Teacher
                 </a>
+            <li>
+                <a href="/seniorTeacher">
+                    <span class="rect"></span>
+                    <span class="circle"></span>
+                    Senior Teacher
+                </a>
             </li>
         </ul>
     </nav>
